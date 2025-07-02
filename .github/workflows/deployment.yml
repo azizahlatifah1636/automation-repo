@@ -1,0 +1,58 @@
+name: Production Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+        - production
+        - staging
+      version:
+        description: 'Version to deploy'
+        required: true
+        type: string
+
+jobs:
+  deploy-production:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.event.inputs.environment }}
+      url: ${{ steps.deploy.outputs.url }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.inputs.version }}
+    
+    - name: Validate deployment requirements
+      run: |
+        echo "Validating deployment for version: ${{ github.event.inputs.version }}"
+        echo "Target environment: ${{ github.event.inputs.environment }}"
+    
+    - name: Deploy to ${{ github.event.inputs.environment }}
+      id: deploy
+      run: |
+        echo "Deploying to ${{ github.event.inputs.environment }}..."
+        # Add your deployment commands here
+        
+        if [ "${{ github.event.inputs.environment }}" = "production" ]; then
+          echo "url=https://pipeline-automation.com" >> $GITHUB_OUTPUT
+        else
+          echo "url=https://staging.pipeline-automation.com" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Run post-deployment verification
+      run: |
+        echo "Running post-deployment verification..."
+        # Add verification scripts here
+    
+    - name: Notify deployment status
+      if: always()
+      run: |
+        echo "Deployment completed with status: ${{ job.status }}"
+        # Add notification logic (Slack, Teams, etc.)

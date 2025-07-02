@@ -1,0 +1,48 @@
+{
+  "name": "pipeline-automation",
+  "version": "1.0.0",
+  "description": "Pipeline automation testing suite for API and Web UI",
+  "private": true,
+  "scripts": {
+    "setup:all": ".\\install-deps.ps1",
+    "test:all": ".\\test-quick.ps1 -Type all",
+    "test:api": ".\\test-quick.ps1 -Type api",
+    "test:web": ".\\test-quick.ps1 -Type web",
+    "test:e2e": ".\\test-quick.ps1 -Type e2e",
+    "test:performance": ".\\test-quick.ps1 -Type performance",
+    "lint:all": "cd api && npm run lint && cd ..\\web-ui && npm run lint",
+    "lint:api": "cd api && npm run lint",
+    "lint:web": "cd web-ui && npm run lint",
+    "start:api": "cd api && npm start",
+    "start:web": "cd web-ui && npm start",
+    "start:all": "concurrently \"npm run start:api\" \"npm run start:web\"",
+    "build:docker": "docker build -t pipeline-automation-api ./api && docker build -t pipeline-automation-web ./web-ui",
+    "clean": "if exist api\\node_modules rmdir /s /q api\\node_modules && if exist web-ui\\node_modules rmdir /s /q web-ui\\node_modules && if exist smoke-tests\\node_modules rmdir /s /q smoke-tests\\node_modules",
+    "clean:install": "npm run clean && npm run setup:all",
+    "playwright:install": "cd web-ui && npx playwright install",
+    "playwright:ui": "cd web-ui && npx playwright test --ui",
+    "playwright:debug": "cd web-ui && npx playwright test --debug",
+    "check:ports": "netstat -ano | findstr :3000 && netstat -ano | findstr :8080",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "keywords": [
+    "automation",
+    "testing",
+    "api",
+    "web-ui",
+    "github-actions",
+    "ci-cd"
+  ],
+  "author": "QA Team",
+  "license": "MIT",
+  "workspaces": [
+    "api",
+    "web-ui",
+    "smoke-tests"
+  ]
+}

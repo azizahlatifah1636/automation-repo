@@ -1,0 +1,94 @@
+version: '3.8'
+
+services:
+  # API Service
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: pipeline-automation-api
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - API_PORT=3000
+      - DATABASE_URL=postgresql://postgres:password@db:5432/testdb
+    depends_on:
+      - db
+    volumes:
+      - ./api/src:/app/src
+      - ./api/tests:/app/tests
+    networks:
+      - automation-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Web UI Service
+  web-ui:
+    build:
+      context: ./web-ui
+      dockerfile: Dockerfile
+    container_name: pipeline-automation-web
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=development
+      - WEB_UI_PORT=8080
+      - API_BASE_URL=http://api:3000
+    depends_on:
+      - api
+    volumes:
+      - ./web-ui/src:/app/src
+      - ./web-ui/public:/app/public
+    networks:
+      - automation-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Database Service (for testing)
+  db:
+    image: postgres:15-alpine
+    container_name: pipeline-automation-db
+    environment:
+      - POSTGRES_DB=testdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - automation-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Service (for caching/sessions)
+  redis:
+    image: redis:7-alpine
+    container_name: pipeline-automation-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - automation-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  postgres_data:
+
+networks:
+  automation-network:
+    driver: bridge
