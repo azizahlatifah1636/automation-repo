@@ -1,9 +1,9 @@
-# 📊 Cara Membuka dan Menggunakan Report
+ Cara Membuka dan Menggunakan Report
 
-## 🎯 Overview
+
 Sistem CI/CD pipeline ini menghasilkan berbagai jenis report yang dapat diunduh dan dilihat setelah workflow selesai dijalankan.
 
-## 📂 Jenis Report yang Tersedia
+## Jenis Report yang Tersedia
 
 ### 1. **Test Coverage Report**
 - **File**: `coverage-report.zip`
@@ -51,7 +51,8 @@ Sistem CI/CD pipeline ini menghasilkan berbagai jenis report yang dapat diunduh 
   3. Buka `security-report.json` dengan text editor
   4. Lihat vulnerabilities dan recommendations
 
-## 🔍 Cara Mengakses Reports
+ 
+ ## Cara Mengakses Reports
 
 ### **Step 1: Buka GitHub Actions**
 1. Buka repository: https://github.com/azizahlatifah1636/automation-repo
@@ -69,7 +70,7 @@ Sistem CI/CD pipeline ini menghasilkan berbagai jenis report yang dapat diunduh 
 2. Buka file sesuai petunjuk di atas
 3. Untuk HTML reports, buka dengan browser modern (Chrome, Firefox, Safari)
 
-## 📱 Viewing Reports
+Viewing Reports
 
 ### **Browser Requirements**
 - Chrome/Chromium 70+
@@ -77,13 +78,13 @@ Sistem CI/CD pipeline ini menghasilkan berbagai jenis report yang dapat diunduh 
 - Safari 12+
 - Edge 79+
 
-### **HTML Reports Features**
+**HTML Reports Features**
 - **Interactive**: Klik untuk expand/collapse sections
 - **Filterable**: Filter by status, browser, test type
 - **Searchable**: Search specific tests atau files
 - **Responsive**: Mobile-friendly viewing
 
-## 🛠️ Troubleshooting
+Troubleshooting
 
 ### **Report Tidak Bisa Dibuka**
 1. **Pastikan file sudah di-extract** dari ZIP
@@ -102,23 +103,15 @@ Sistem CI/CD pipeline ini menghasilkan berbagai jenis report yang dapat diunduh 
 2. **Pastikan tests berjalan** tanpa critical failures
 3. **Cek artifact retention** (default 90 days)
 
-## 🔗 Links Berguna
+Links 
 
 - **Repository**: https://github.com/azizahlatifah1636/automation-repo
 - **Actions**: https://github.com/azizahlatifah1636/automation-repo/actions
 - **Issues**: https://github.com/azizahlatifah1636/automation-repo/issues
 
-## 📞 Support
 
-Jika mengalami masalah dengan reports:
-1. Cek dokumentasi ini terlebih dahulu
-2. Lihat workflow logs untuk error details
-3. Buat issue di repository dengan detail error
-4. Sertakan screenshot jika diperlukan
 
 ---
-
-## 🎯 Quick Start
 
 **Untuk melihat hasil testing terbaru:**
 1. Go to [Actions tab](https://github.com/azizahlatifah1636/automation-repo/actions)
