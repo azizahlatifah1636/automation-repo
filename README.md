@@ -311,13 +311,16 @@ npm run lint:all
 
  Jenis Reports yang Tersedia
 
-| Report Type | Artifact Name | Cara Buka |
+##  Ringkasan Akses Report
 
- **Test Coverage** | `coverage-report.zip` | Extract → Buka `index.html` |
- **API Tests** | `api-test-results.zip` | Extract → Buka `test-report.html` |
- **UI Tests** | `ui-test-results.zip` | Extract → Buka `playwright-report/index.html` |
- **Performance** | `performance-results.zip` | Extract → Buka `performance-report.html` |
- **Security Scan** | `security-scan-results.zip` | Extract → Buka `security-report.json` |
+|  **Report Type**       |     **Artifact Name**        |  **Cara Buka**                                  |
+|------------------------|------------------------------|-------------------------------------------------|
+| **Test Coverage**      | `coverage-report.zip`        | Extract → Buka `index.html`                     |
+| **API Tests**          | `api-test-results.zip`       | Extract → Buka `test-report.html`               |
+| **UI Tests**           | `ui-test-results.zip`        | Extract → Buka `playwright-report/index.html`   |
+| **Performance**        | `performance-results.zip`    | Extract → Buka `performance-report.html`        |
+| **Security Scan**      | `security-scan-results.zip`  | Extract → Buka `security-report.json`           |
+
 
  Troubleshooting Reports
 
