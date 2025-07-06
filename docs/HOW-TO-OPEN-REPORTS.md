@@ -118,4 +118,4 @@ Links
 2. Click latest workflow run
 3. Download "ui-test-results" artifact
 4. Extract dan buka `playwright-report/index.html`
-5. Enjoy comprehensive test reports! 🎉
+
