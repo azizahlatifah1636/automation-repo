@@ -299,3 +299,41 @@ npm run test:performance
 # Lint semua project
 npm run lint:all
 ```
+
+## 📊 Cara Membuka Test Reports
+
+### 🎯 Akses Reports dari GitHub Actions
+
+1. **Buka Repository Actions**: https://github.com/azizahlatifah1636/automation-repo/actions
+2. **Pilih workflow run** yang ingin dilihat
+3. **Scroll ke bawah** untuk melihat section "Artifacts"
+4. **Download artifact** yang dibutuhkan
+
+### 📂 Jenis Reports yang Tersedia
+
+| Report Type | Artifact Name | Cara Buka |
+|-------------|---------------|-----------|
+| 🧪 **Test Coverage** | `coverage-report.zip` | Extract → Buka `index.html` |
+| 🔧 **API Tests** | `api-test-results.zip` | Extract → Buka `test-report.html` |
+| 🌐 **UI Tests** | `ui-test-results.zip` | Extract → Buka `playwright-report/index.html` |
+| ⚡ **Performance** | `performance-results.zip` | Extract → Buka `performance-report.html` |
+| 🔒 **Security Scan** | `security-scan-results.zip` | Extract → Buka `security-report.json` |
+
+### 🛠️ Troubleshooting Reports
+
+**Jika report tidak bisa dibuka:**
+1. Pastikan file sudah di-extract dari ZIP
+2. Gunakan browser modern (Chrome, Firefox, Safari)
+3. Disable ad-blockers yang mungkin memblokir local files
+4. Untuk advanced features, buka dengan web server:
+   ```bash
+   # Extract report files
+   unzip ui-test-results.zip
+   cd playwright-report
+   
+   # Start web server
+   python -m http.server 8000
+   # Buka http://localhost:8000
+   ```
+
+📖 **Dokumentasi lengkap**: [HOW-TO-OPEN-REPORTS.md](docs/HOW-TO-OPEN-REPORTS.md)
